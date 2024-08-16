@@ -1,0 +1,31 @@
+@(userForm: Form[User])(implicit request: MessagesRequestHeader)
+
+@main("Login User") {
+  @*<form method="post" action="@routes.MyController.createUser">  
+    @helper.CSRF.formField
+    <h3>Create User</h3>
+    Username: <input type="text" name="username"></input>
+    <br>
+    Password: <input type="Password" name="password"></input>
+    <br>
+    <input type="submit"></input>
+  </form>*@
+
+	@helper.form(action = routes.HomeController.validateLoginForm){
+    @helper.CSRF.formField
+    @helper.inputText(userForm("Username"))
+    @helper.inputText(userForm("Password"))
+    <div class="form-action">
+      <button type="submit">Login</button>
+    </div>
+  }
+
+  <h1>Login Account</h1>
+  <form method="get" action="/validateGet1">
+    Username: <input type="text" name="username"></input>
+    <br>
+    Password: <input type="Password" name="password"></input>
+    <br>
+    <input type="submit"></input>
+  </form>
+}

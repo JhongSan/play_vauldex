@@ -1,0 +1,13 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/my-project_3-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/classes/test.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	test.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/classes/test.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Chapter24$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/classes/Chapter24$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Chapter24$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/classes/Chapter24$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Chapter24$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Chapter24/target/scala-3.3.1/classes/Chapter24$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

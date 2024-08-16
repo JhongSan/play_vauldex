@@ -1,0 +1,45 @@
+// #1 Design a RESTful API that allows users to browse and borrow books. The API should allow users to perform the following actions:
+  1.1 Search for books by title or author.
+  1.2 View a list of all available books.
+  1.3 Borrow a book if it is available.
+  1.4 Return a book.
+// #2 Design a RESTful API for a music streaming service that allows users to create playlists, add and remove songs from them, and play songs.
+The API should allow users to perform the following actions:
+  2.1 View a list of all available songs.
+  2.2 Search for songs by title, artist, or album.
+  2.3 Create a new playlist.
+  2.4 Add songs to a playlist.
+  2.5 Remove songs from a playlist.
+  2.6 Play a song.
+// #3 Design a RESTful API for an e-commerce website that allows users to browse products, add them to a cart, and checkout.
+The API should allow users to perform the following actions:
+  3.1 View a list of all products.
+  3.2 Search for products by name or category.
+  3.3 View the details of a specific product.
+  3.4 Add a product to a cart.
+  3.5 View the contents of a cart.
+  3.6 Remove a product from a cart.
+  3.7 Checkout and place an order.
+
+#1
+1.1 HTTP GET /books/{title|author}
+1.2 HTTP GET /books/available
+1.3 HTTP POST /books/{book-id}/borrow
+1.4 HTTP POST /books/{book-id}/return
+
+#2
+2.1 HTTP GET /songs/genre
+2.2 HTTP GET /songs/{title|artist|album}
+2.3 HTTP POST /songs/create
+2.4 HTTP POST /songs/playlist/music
+2.5 HTTP DELETE /songs/playlist/music/remove
+2.6 HTTP GET /songs/playlist/music
+
+#3
+3.1 HTTP GET /products/list
+3.2 HTTP GET /products/list/name
+3.3 HTTP GET /products/list/name/details
+3.4 HTTP PUT /products/cart
+3.5 HTTP GET /products/cart
+3.6 HTTP DELETE /products/cart
+3.7 HTTP POST /products/cart

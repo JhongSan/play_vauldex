@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: /Users/lbsanchez/Desktop/filesLoreto/my-project/src/test/scala/ExampleSpec.scala:5:20 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m5 |[0m		assert(HelloWorld.hello == [31m"Hello World!"[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m  |[0m		       ^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m  |[0m		       value hello is not a member of object HelloWorld[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

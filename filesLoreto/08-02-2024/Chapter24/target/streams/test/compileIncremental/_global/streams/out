@@ -1,0 +1,30 @@
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
+[0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 1 products, 1 sources, 5 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(${BASE}/src/test/scala/ExampleSpec.scala), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set(NamesChange(HelloWorld$,ModifiedNames(changes = UsedName($isInstanceOf,[Default]), UsedName(hello,[Default]), UsedName(!=,[Default]), UsedName(finalize,[Default]), UsedName(equals,[Default]), UsedName(notify,[Default]), UsedName($asInstanceOf,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(##,[Default]), UsedName(synchronized,[Default]), UsedName(Object;init;,[Default]), UsedName(toString,[Default]), UsedName(getClass,[Default]), UsedName(HelloWorld,[Default]), UsedName(ne,[Default]), UsedName(asInstanceOf,[Default]), UsedName(==,[Default]), UsedName(hashCode,[Default]), UsedName(clone,[Default]), UsedName(HelloWorld;init;$,[Default]), UsedName(wait,[Default]), UsedName(notifyAll,[Default])))))[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe HelloWorld$ has the following regular definitions changed:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	UsedName($isInstanceOf,[Default]), UsedName(hello,[Default]), UsedName(!=,[Default]), UsedName(finalize,[Default]), UsedName(equals,[Default]), UsedName(notify,[Default]), UsedName($asInstanceOf,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(##,[Default]), UsedName(synchronized,[Default]), UsedName(Object;init;,[Default]), UsedName(toString,[Default]), UsedName(getClass,[Default]), UsedName(HelloWorld,[Default]), UsedName(ne,[Default]), UsedName(asInstanceOf,[Default]), UsedName(==,[Default]), UsedName(hashCode,[Default]), UsedName(clone,[Default]), UsedName(HelloWorld;init;$,[Default]), UsedName(wait,[Default]), UsedName(notifyAll,[Default]).[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0m[0mdebug[0m] [0m[0mFiles invalidated by inheriting from (external) HelloWorld$: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mNow invalidating by inheritance (internally).[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting direct dependencies of all classes transitively invalidated by inheritance.[0m
+[0m[[0m[0mdebug[0m] [0m[0mGetting classes that directly depend on (external) HelloWorld$.[0m
+[0m[[0m[0mdebug[0m] [0m[0mThe following modified names cause invalidation of ExampleSpec: [==, HelloWorld, hello][0m
+[0m[[0m[0mdebug[0m] [0m[0m[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial source changes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	removed: Set(${BASE}/src/test/scala/ExampleSpec.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set(NamesChange(HelloWorld$,ModifiedNames(changes = UsedName($isInstanceOf,[Default]), UsedName(hello,[Default]), UsedName(!=,[Default]), UsedName(finalize,[Default]), UsedName(equals,[Default]), UsedName(notify,[Default]), UsedName($asInstanceOf,[Default]), UsedName(isInstanceOf,[Default]), UsedName(eq,[Default]), UsedName(##,[Default]), UsedName(synchronized,[Default]), UsedName(Object;init;,[Default]), UsedName(toString,[Default]), UsedName(getClass,[Default]), UsedName(HelloWorld,[Default]), UsedName(ne,[Default]), UsedName(asInstanceOf,[Default]), UsedName(==,[Default]), UsedName(hashCode,[Default]), UsedName(clone,[Default]), UsedName(HelloWorld;init;$,[Default]), UsedName(wait,[Default]), UsedName(notifyAll,[Default]))))[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(ExampleSpec)[0m
+[0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	external source: Set(ExampleSpec)[0m
+[0m[[0m[0mdebug[0m] [0m[0mall 0 sources are invalidated[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: ExampleSpec[0m
+[0m[[0m[0mdebug[0m] [0m[0mRecompiling all sources: number of invalidated sources > 50.0 percent of all sources[0m
+[0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m

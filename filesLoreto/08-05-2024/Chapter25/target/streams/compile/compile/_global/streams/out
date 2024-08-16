@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- Error: /Users/lbsanchez/Desktop/filesLoreto/08-05-2024/Chapter25/src/main/scala/Chapter25.scala:27:42 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m27 |[0m      println([31ms"in the 'yield': [0m${delta()})[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                          ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                          unclosed string literal[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

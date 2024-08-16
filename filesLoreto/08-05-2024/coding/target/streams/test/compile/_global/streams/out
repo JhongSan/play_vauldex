@@ -1,0 +1,9 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E040] Syntax Error: /Users/lbsanchez/Desktop/filesLoreto/08-05-2024/coding/src/test/scala/lbsanchez-08052024-test.scala:33:31 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m33 |[0m      [36mn5[0m => n5 shouldBe (Range [31m1[0m to [31m5[0m, Range [31m6[0m to [31m10[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                               ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                               ')' expected, but integer literal found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E172] Type Error: /Users/lbsanchez/Desktop/filesLoreto/08-05-2024/coding/src/test/scala/lbsanchez-08052024-test.scala:33:30 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m33 |[0m      [36mn5[0m => n5 shouldBe (Range [31m1[0m to [31m5[0m, Range [31m6[0m to [31m10[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                              ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mValues of types (Seq[Int], Seq[Int]) and scala.collection.immutable.Range.type cannot be compared with == or !=[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m

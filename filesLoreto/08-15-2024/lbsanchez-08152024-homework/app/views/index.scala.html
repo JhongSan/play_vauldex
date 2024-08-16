@@ -1,0 +1,68 @@
+@(pokemon: play.api.libs.json.JsValue)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pokémon Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .pokemon-container {
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        text-align: center;
+        max-width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .pokemon-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .pokemon-details {
+        margin-top: 10px;
+      }
+      .pokemon-details div {
+        margin-bottom: 10px;
+      }
+      .pokemon-sprite {
+        max-width: 200px;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pokemon-container">
+      <div class="pokemon-name">
+        @pokemon("name").as[String].capitalize
+      </div>
+      <div class="pokemon-details">
+        <div><strong></strong>
+          <img src="@((pokemon \ "sprites" \ "front_default").as[String])" alt="Pokémon Sprite" class="pokemon-sprite" />
+        </div>
+        <div><strong>ID:</strong> @pokemon("id").as[Int]</div>
+        <div><strong>Height:</strong> @pokemon("height").as[Int] decimeters</div>
+        <div><strong>Weight:</strong> @pokemon("weight").as[Int] hectograms</div>
+        <div><strong>Types:</strong>
+          @{
+            val types = (pokemon \ "types").as[Seq[play.api.libs.json.JsValue]]
+            types.map { typeObj =>
+              (typeObj \ "type" \ "name").as[String].capitalize
+            }.mkString(", ")
+          }
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
