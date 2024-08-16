@@ -1,5 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: /Users/lbsanchez/Desktop/filesLoreto/07-31-2024/Chapter23/src/main/scala/Chapter23.scala:147:45 [0m[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m147 |[0m	println(List([31m"z"[0m, [31m"x"[0m, [31m"c"[0m).functorForAll(_.toChar))[0m
-[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m	                                          ^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                                value toChar is not a member of String[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m

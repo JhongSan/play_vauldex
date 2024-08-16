@@ -1,5 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E172] Type Error: /Users/lbsanchez/Desktop/filesLoreto/07-30-2024/Chapter21/src/main/scala/Chapter21.scala:56:60 [0m[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m56 |[0m	[33mif[0m xs.isEmpty [33mthen[0m Nil [33melse[0m insert(xs.head, isort(xs.tail))[0m
-[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m	                                                           ^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m   |[0mNo given instance of type Ord[T] was found for parameter x$3 of [33mmethod[0m [35minsert[0m[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
