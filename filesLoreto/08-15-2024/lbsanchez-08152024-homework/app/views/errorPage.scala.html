@@ -1,0 +1,28 @@
+@(message: String)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Error</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .error-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid red;
+        border-radius: 8px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-container">
+      <h1>Error</h1>
+      <p>@message</p>
+    </div>
+  </body>
+</html>

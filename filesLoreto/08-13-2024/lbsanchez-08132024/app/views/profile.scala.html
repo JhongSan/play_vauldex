@@ -1,0 +1,12 @@
+@()(implicit request: MessagesRequestHeader)
+
+@main("Welcome to Play") {
+  <form method="post" action="/profilePost">
+  	@helper.CSRF.formField
+  	Username: <input type="text" name="username"></input>
+  	<br>
+  	Password: <input type="Password" name="password"></input>
+  	<br>
+  	<input type="submit"></input>
+  </form>
+}

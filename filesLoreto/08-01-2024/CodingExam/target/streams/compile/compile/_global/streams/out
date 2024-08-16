@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: /Users/lbsanchez/Desktop/filesLoreto/08-01-2024/CodingExam/src/main/scala/lbsanchez-08012024.scala:45:59 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m45 |[0m[33mdef[0m [36meq[0m[[35mE[0m]([36meq1[0m: [35mE[0m, [36meq2[0m: [35mE[0m)(using [36mequ[0m: [35mEq[0m[[35mE[0m]): [35mBoolean[0m = equ.equa(eq1, eq2)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                                       ^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m          value equa is not a member of Eq[E] - did you mean equ.equals?[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

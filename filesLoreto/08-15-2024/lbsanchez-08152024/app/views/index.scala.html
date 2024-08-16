@@ -1,0 +1,18 @@
+@(data: String)
+
+@main("POKEDEX") {
+  <h1>Pokemon</h1>
+  <form method="get" action="/validPokemon">
+    Pokemon Name: 
+    <br>
+    <input type="text" name="pokemon"></input>
+    <br>
+    <br>
+    <input type="submit"></input>
+  </form>
+
+  <form method="get" action="/pokemonList">
+    <br>
+    <input type="submit" value="Pokemon List"></input>
+  </form>
+}

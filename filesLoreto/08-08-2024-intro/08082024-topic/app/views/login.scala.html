@@ -1,0 +1,43 @@
+@(loginForm: Form[LoginData])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@main("Login") {
+  <h1>Login Account</h1>
+  <form method="get" action="/validateGet1">
+    Username: <input type="text" name="username"></input>
+    <br>
+    Password: <input type="Password" name="password"></input>
+    <br>
+    <input type="submit"></input>
+  </form>
+
+  @*<form method="post" action="@routes.MyController.validateLoginPost">*@
+  <form method="post" action="/validatePost1">  
+    @helper.CSRF.formField
+    <h2>Login With Post</h2>
+    Username: <input type="text" name="username" id="username-login"></input>
+    <br>
+    Password: <input type="Password" name="password" id="password-login"></input>
+    <br>
+    <input type="submit"></input>
+  </form>
+
+  @helper.form(action = routes.MyController.validateLoginForm){
+    @helper.CSRF.formField
+    @helper.inputText(loginForm("Username"))
+    @helper.inputText(loginForm("Password"))
+    <div class="form-action">
+      <button type="submit">Login</button>
+    </div>
+  }
+
+  @*<form method="post" action="@routes.MyController.validateLoginPost">*@
+  <form method="post" action="@routes.MyController.createUser">  
+    @helper.CSRF.formField
+    <h3>Create User</h3>
+    Username: <input type="text" name="username" id="username-create"></input>
+    <br>
+    Password: <input type="Password" name="password" id="password-create"></input>
+    <br>
+    <input type="submit"></input>
+  </form>
+}

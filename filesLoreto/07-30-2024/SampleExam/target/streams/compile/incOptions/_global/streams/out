@@ -1,0 +1,47 @@
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /Users/lbsanchez/Desktop/filesLoreto/07-30-2024/SampleExam/target/scala-3.3.1/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_Some$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	examExtension$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	testCustomFlatten.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flattener$given_Flattener_List$.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /Users/lbsanchez/Desktop/filesLoreto/07-30-2024/SampleExam/target/scala-3.3.1/classes.bak[0m

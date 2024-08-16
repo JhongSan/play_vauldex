@@ -1,0 +1,5 @@
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E008] Not Found Error: /Users/lbsanchez/Desktop/filesLoreto/08-02-2024/Coding/src/main/scala/lbsanchez-08022024.scala:107:47 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m107 |[0m[33mdef[0m [36moverallTopStudent[0m = avgGradePerStudent.max.studentName[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m    |[0m                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m    |[0m                    value studentName is not a member of (String, Int)[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
