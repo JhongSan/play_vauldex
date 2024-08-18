@@ -13,20 +13,20 @@ import domain.Rating._
 
 class Employer(work: ActorRef) extends Actor {
   def receive = {
-    case ProjectPlan => work ! Work
-    case WorkCompleted => ProjectCompleted
+    case ProjectPlan => work ! Work(sender())
+    case WorkCompleted(client) => client ! ProjectCompleted
     case Excellent => work ! Bonus(5000)
     case Good => work ! Bonus(4000)
     case Average => work ! Bonus(3000)
-    case Bad => work ! Bad
+    case Bad => work ! Memo
     case NeverAgain => work ! SalaryDeduction
   }
 }
 
 class Employee extends Actor {
   def receive = {
-    case Work => sender() ! WorkCompleted
-    case Bonus => sender() ! Gratitude
+    case Work(client) => sender() ! WorkCompleted(client)
+    case Bonus(value) => sender() ! Gratitude
     case Memo => sender() ! Explanation
     case SalaryDeduction => sender() ! ResignationLetter
   }
