@@ -1,18 +1,18 @@
-#1 Update the `FIRST_NAME` and `LAST_NAME` of the rows in `PROFILES` that belong to users with `ACCOUNTS` record that have "kjpmantos@vauldex.com" `EMAIL`. First name must be "Kemmy" and the last name must be "Matty".
-#2 Retrieve the day, month and year from the `ATTEMPTED_AT` column from account histories records in a separated columns.
-  Example:
-  --------------------------
-  | Day   | Month   | Year |
-  --------------------------
-  | 01    |   08    | 2023 |
-  --------------------------
-#3 Find the `ACCOUNTS` records of the users who have a `PROFILES` record that has a `FIRST_NAME` or `LAST_NAME` value that starts with "Eji".
-#4 Update the `GENDER` to `:male_sign:` for profiles that have a "John" anywhere on their `FIRST_NAME` or `LAST_NAME`.
-#5 Without using the `<`, `>` or `>=`, `<=` operators, retrieve all account records that were created from August 01, 2023 until August 15, 2023.
-#6 Without using the `<`, `>` or `>=`, `<=` operators, count how many accounts have been created starting from August 01, 2023 to September 01, 2023.
-#7 Using the `exists` expression, find the profile record associated with the account that has the email value "rejima@vauldex.com".
-#8 Retrieve all the records in the accounts that belong to users who attempted successfully from their latest `ACCOUNT_AUTH_HISTORIES` record.
-#9 Retrieve all the records in the profiles table with the gender values “:male_sign:” or “:female_sign:“. For each record, a separate column called "GENDER_IN_WORDS" should be displayed. If the gender value is `:male_sign:`, assign the value "Male". Otherwise, assign the value "Female".
+-- #1 Update the `FIRST_NAME` and `LAST_NAME` of the rows in `PROFILES` that belong to users with `ACCOUNTS` record that have "kjpmantos@vauldex.com" `EMAIL`. First name must be "Kemmy" and the last name must be "Matty".
+-- #2 Retrieve the day, month and year from the `ATTEMPTED_AT` column from account histories records in a separated columns.
+--   Example:
+--   --------------------------
+--   | Day   | Month   | Year |
+--   --------------------------
+--   | 01    |   08    | 2023 |
+--   --------------------------
+-- #3 Find the `ACCOUNTS` records of the users who have a `PROFILES` record that has a `FIRST_NAME` or `LAST_NAME` value that starts with "Eji".
+-- #4 Update the `GENDER` to `:male_sign:` for profiles that have a "John" anywhere on their `FIRST_NAME` or `LAST_NAME`.
+-- #5 Without using the `<`, `>` or `>=`, `<=` operators, retrieve all account records that were created from August 01, 2023 until August 15, 2023.
+-- #6 Without using the `<`, `>` or `>=`, `<=` operators, count how many accounts have been created starting from August 01, 2023 to September 01, 2023.
+-- #7 Using the `exists` expression, find the profile record associated with the account that has the email value "rejima@vauldex.com".
+-- #8 Retrieve all the records in the accounts that belong to users who attempted successfully from their latest `ACCOUNT_AUTH_HISTORIES` record.
+-- #9 Retrieve all the records in the profiles table with the gender values “:male_sign:” or “:female_sign:“. For each record, a separate column called "GENDER_IN_WORDS" should be displayed. If the gender value is `:male_sign:`, assign the value "Male". Otherwise, assign the value "Female".
 
 CREATE TYPE "STATUS" AS ENUM ('ACTIVE', 'INACTIVE', 'DISABLED');
 CREATE TYPE "GENDER" AS ENUM ('♂', '♀', '⚧');
@@ -94,12 +94,31 @@ INSERT INTO "ACCOUNT_AUTH_HISTORIES" ("ACCOUNT_ID", "IS_SUCCESS", "ATTEMPTED_AT"
 INSERT INTO "ACCOUNT_AUTH_HISTORIES" ("ACCOUNT_ID", "IS_SUCCESS", "ATTEMPTED_AT") VALUES ('bc3d9eef-ddf5-4a40-834f-d5de26c2ba58', true, '2023-09-13 00:20:20');
 INSERT INTO "ACCOUNT_AUTH_HISTORIES" ("ACCOUNT_ID", "IS_SUCCESS", "ATTEMPTED_AT") VALUES ('bc3d9eef-ddf5-4a40-834f-d5de26c2ba58', true, '2023-09-13 00:30:30');
 
-UPDATE "PROFILES" SET "FIRST_NAME" = 'Kemmy' AND "LAST_NAME" = 'Matty' WHERE (SELECT "EMAIL" FROM "ACCOUNTS") = 'kjpmantos@vauldex.com';
-SELECT EXTRACT(MONTH FROM TIMESTAMP "ACCOUNT_AUTH_HISTORIES"."ATTEMPTED_AT");
-SELECT * FROM "PROFILES", "ACCOUNTS" WHERE "FIRST_NAME" LIKE ('Eji%') or "LAST_NAME" LIKE ('Eji%');
-UPDATE "PROFILES" SET "GENDER" = '♂' WHERE "FIRST_NAME" = ('John') or "LAST_NAME" = ('John');
-SELECT * FROM "ACCOUNT_AUTH_HISTORIES" WHERE "ATTEMPTED_AT" BETWEEN 'August 01, 2023' AND 'August 15, 2023';
-SELECT COUNT("ATTEMPTED_AT") FROM "ACCOUNT_AUTH_HISTORIES" WHERE "ATTEMPTED_AT" BETWEEN 'August 01, 2023' AND 'September 01, 2023';
-
-
-
+--#1
+UPDATE "PROFILES" SET "FIRST_NAME" = 'Kemmy', "LAST_NAME" = 'Matty' 
+WHERE (SELECT "EMAIL" FROM "ACCOUNTS" WHERE "ACCOUNTS"."ID" = "PROFILES"."ACCOUNT_ID") = 'kjpmantos@vauldex.com';
+--#2
+SELECT EXTRACT(DAY FROM "ATTEMPTED_AT") AS "DAY",
+EXTRACT(MONTH FROM "ATTEMPTED_AT") AS "MONTH",
+EXTRACT(YEAR FROM "ATTEMPTED_AT") AS "YEAR" FROM "ACCOUNT_AUTH_HISTORIES";
+--#3
+SELECT * FROM "ACCOUNTS" WHERE EXISTS(SELECT "FIRST_NAME", "LAST_NAME" FROM "PROFILES" 
+WHERE "ACCOUNTS"."ID" = "PROFILES"."ACCOUNT_ID" AND ("FIRST_NAME" LIKE ('Eji%') OR "LAST_NAME" LIKE ('Eji%')));
+--#4
+UPDATE "PROFILES" SET "GENDER" = '♂' WHERE "FIRST_NAME" LIKE ('John%') OR "LAST_NAME" LIKE ('John%');
+--#5
+SELECT * FROM "ACCOUNTS" WHERE "CREATED_AT" BETWEEN 'August 01, 2023' AND 'August 15, 2023';
+--#6
+SELECT COUNT("CREATED_AT") FROM "ACCOUNTS" 
+WHERE "CREATED_AT" BETWEEN 'August 01, 2023' AND 'September 01, 2023';
+--#7
+SELECT * FROM "PROFILES" WHERE 
+EXISTS(SELECT "EMAIL" FROM "ACCOUNTS" WHERE "ACCOUNT_ID" = "ID" AND "EMAIL" = 'rejima@vauldex.com');
+--#8
+SELECT * FROM "ACCOUNTS" WHERE EXISTS(SELECT "IS_SUCCESS" FROM "ACCOUNT_AUTH_HISTORIES" 
+WHERE "ACCOUNT_AUTH_HISTORIES"."ACCOUNT_ID" = "ACCOUNTS"."ID" AND "IS_SUCCESS" = TRUE);
+--#9
+SELECT *, CASE
+WHEN "GENDER" = '♂' THEN 'Male'
+WHEN "GENDER" = '♀' THEN 'Female' END AS "GENDER_IN_WORD"
+FROM "PROFILES" WHERE "GENDER" IN ('♂', '♀');
