@@ -1,0 +1,147 @@
+@(username: String, items: Seq[models.domain.TodoList])(implicit request: RequestHeader)
+
+@main("Dashboard") {
+  <h2>Welcome, @username!</h2>
+  <p>Your To-Do List.</p>
+
+  <ul id="todo-list">
+    @for(item <- items) {
+      <li>
+        <span>@item.task</span>
+        @if(item.completed) {
+          <span>(Completed)</span>
+        }
+        <button onclick="editTodo('@item.id', '@item.task', '@item.completed')">Edit</button>
+        <button onclick="deleteTodo('@item.id')">Delete</button>
+      </li>
+    }
+  </ul>
+
+  <form id="add-todo-form">
+    <input type="text" id="new-task" placeholder="New task" required>
+    <button type="submit">Add Task</button>
+  </form>
+
+  <form id="update-todo-form" style="display: none;">
+    <input type="hidden" id="update-id">
+    <input type="text" id="update-task" placeholder="Update task" required>
+    <label>
+      <input type="checkbox" id="update-completed">
+      Completed
+    </label>
+    <button type="submit">Update Task</button>
+  </form>
+
+  <script type="text/javascript">
+    document.getElementById("add-todo-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const task = document.getElementById("new-task").value;
+
+      fetch("@routes.HomeController.getUserId().url", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status !== "error") {
+          const userId = data.userId;
+
+          fetch("@routes.TodoController.createTodo().url", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ task: task, completed: false, userId: userId })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              window.location.reload(); // Reload to display the updated to-do list
+            } else {
+              alert(data.message);
+            }
+          })
+          .catch(error => {
+            alert("An error occurred. Please try again.");
+          });
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        alert("An error occurred. Please try again.");
+      });
+    });
+
+    function deleteTodo(todoId) {
+      fetch(`/todos/${todoId}`, {
+        method: "DELETE"
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          window.location.reload(); // Reload to display the updated to-do list
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        alert("An error occurred. Please try again.");
+      });
+    }
+
+    function editTodo(id, task, completed) {
+      document.getElementById("update-id").value = id;
+      document.getElementById("update-task").value = task;
+      document.getElementById("update-completed").checked = completed;
+      document.getElementById("update-todo-form").style.display = "block";
+    }
+
+    document.getElementById("update-todo-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const id = document.getElementById("update-id").value;
+      const task = document.getElementById("update-task").value;
+      const completed = document.getElementById("update-completed").checked;
+
+      fetch("@routes.HomeController.getUserId().url", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status !== "error") {
+          const userId = data.userId;
+
+          fetch("@routes.TodoController.updateTodo().url", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id: id, task: task, completed: completed, userId: userId })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              window.location.reload(); // Reload to display the updated to-do list
+            } else {
+              alert(data.message);
+            }
+          })
+          .catch(error => {
+            alert("An error occurred. Please try again.");
+          });
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        alert("An error occurred. Please try again.");
+      });
+    });
+
+  </script>
+}

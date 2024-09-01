@@ -1,0 +1,41 @@
+@(error: Option[String] = None)(implicit request: RequestHeader)
+
+@main("Login") {
+    <h2>Login</h2>
+    <div id="login-error" style="color: red;"></div>
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <script type="text/javascript">
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+    
+            fetch("@routes.HomeController.login()", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.status);
+                if (data.status === "success") {
+                window.location.href = "@routes.HomeController.dashboard()";
+                } else {
+                document.getElementById("login-error").innerText = data.message;
+                }
+            })
+            .catch(error => {
+                document.getElementById("login-error").innerText = "An error occurred. Please try again.";
+            });
+        });
+    </script>
+}
