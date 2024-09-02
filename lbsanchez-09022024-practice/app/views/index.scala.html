@@ -1,0 +1,28 @@
+@(pictures: Seq[models.domain.Picture])(implicit request: RequestHeader, flash: Flash)
+
+@main("Picture Upload") {
+  <h1>Upload a Picture</h1>
+
+  @if(flash.get("success").isDefined) {
+    <p class="success">@flash.get("success").get</p>
+  }
+  @if(flash.get("error").isDefined) {
+    <p class="error">@flash.get("error").get</p>
+  }
+
+  <form action="@routes.HomeController.upload()" method="post" enctype="multipart/form-data">
+    <input type="file" name="picture">
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Uploaded Pictures</h2>
+  <ul>
+    @for(picture <- pictures) {
+      <li>
+        <img src="@routes.Assets.versioned("uploads/" + picture.filename)" alt="Uploaded picture" style="max-width: 200px;">
+        <p>@picture.filename</p>
+        <small>@picture.uploadTime</small>
+      </li>
+    }
+  </ul>
+}
