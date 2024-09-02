@@ -1,0 +1,81 @@
+@(posts: Seq[models.domain.Post])(implicit request: RequestHeader)
+
+@main("Bulletin Board"){
+	<h1>Public Bulletin Board</h1>
+	<h2>Post a message</h2>
+	<form id="post-form">
+		<textarea id="new-message" placeholder="Your message"></textarea><br>
+		<input type="text" id="new-picture" placeholder="Picture Link"><br>
+		<input type="password" id="new-password" placeholder="Optional password"><br>
+		<button type="submit">Post</button>
+	</form>
+
+	<ul id="post-list">
+		@for(post <- posts){
+			<li>
+				<p>@post.message</p>
+				@post.picture.map { picture =>
+		          <img src="@picture" alt="User uploaded image">
+		        }.getOrElse {
+		          <p>No image available</p>
+		        }
+				<small>@post.postTime</small>
+				<form onsubmit="return deletePost('@post.id')">
+					<!-- <input type="password" id="password-'@post.id'" placeholder="Pasword to delete"> -->
+					<!-- <button onclick="deletePost('@post.id')">Delete</button> -->
+					<input type="password" id="password-'@post.id'" placeholder="Password to delete">
+					<button type="submit">Delete</button>
+				</form>
+			</li>
+		}
+	</ul>
+
+	<script type="text/javascript">
+		document.getElementById("post-form").addEventListener("submit", function(event){
+			event.preventDefault();
+			const message = document.getElementById("new-message").value;
+			const password = document.getElementById("new-password").value;
+			const picture = document.getElementById("new-picture").value;
+			
+			fetch("/bulletins", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({message: message, password: password, picture: picture})
+			})
+			.then(response => response.json())
+			.then(data => {
+				if(data.status === "success"){
+					window.location.reload();
+				} else {
+					alert(data.message);
+				}
+			})
+			.catch(error => {
+				alert("An error occured. Please try again.")
+			});
+		});
+
+		function deletePost(postId){
+			const password = document.getElementById(`password-'${postId}'`).value;
+			console.log(password);
+
+			fetch(`/bulletins/${postId}`, {
+				method: "DELETE",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({password: password})
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				if(data.status === "success"){
+					window.location.reload();
+				} else {
+					alert("Failed to delete post.")
+				}
+			});
+			return false;
+		}
+	</script>
+}
+
+
