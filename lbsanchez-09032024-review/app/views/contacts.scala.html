@@ -1,0 +1,215 @@
+@(username: String, contacts: Seq[models.domain.Contact])(implicit request: RequestHeader)
+
+@main("Contacts"){
+    <h2>Hello! @username</h2>
+    <form id="add-contact">
+        <input type="text" id="new-fname" placeholder="First Name">
+        <input type="text" id="new-mname" placeholder="Middle Name">
+        <input type="text" id="new-lname" placeholder="Last Name">
+        <input type="text" id="new-number" placeholder="Phone Number">
+        <input type="text" id="new-email" placeholder="Email"><br><br>
+        <button type="submit">Add Contact</button><br><br>
+    </form>
+
+    <form id="update-contact" style="display: none;">
+        <input type="hidden" id="update-id">
+        <input type="text" id="update-fname" placeholder="Optional First Name">
+        <input type="text" id="update-mname" placeholder="Optional Middle Name">
+        <input type="text" id="update-lname" placeholder="Optional Last Name">
+        <input type="text" id="update-number" placeholder="Optional Phone Number">
+        <input type="text" id="update-email" placeholder="Optional Email">
+        <button type="submit">Update Contact</button>
+    </form>
+
+    <div>
+        <input type="text" id="search-contact" placeholder="Search">
+        <button id="search-button">Search</button>
+    </div>
+
+    <ul id="contact">
+        @for(contact <- contacts){
+            <li class="contact-item">
+                <h5>Name:</h5>
+                @if(contact.firstName.isDefined){
+                    <span>@contact.firstName</span>
+                }
+                @if(contact.middleName.isDefined){
+                    <span>@contact.middleName</span>
+                } 
+                @if(contact.lastName.isDefined) {
+                    <span>@contact.lastName</span>
+                }
+                <br>
+                <h5>Phone Number:</h5>
+                <span>@contact.phoneNumber</span>
+                <h5>Email:</h5>
+                <span>@contact.email</span><br><br>
+                <button onclick="editContact('@contact.id', '@contact.firstName', '@contact.middleName', '@contact.lastName', '@contact.phoneNumber', '@contact.email')">Edit</button>
+                <button onclick="deleteContact('@contact.id')">Delete</button>
+            </li>
+        }
+    </ul>
+
+    <script type="text/javascript">
+        // Function to filter contacts based on the search term
+        function filterContacts(searchTerm) {
+            const contactItems = document.querySelectorAll(".contact-item");
+
+            contactItems.forEach(item => {
+		        const nameSpans = item.querySelectorAll("h5 + span");
+		        const name = Array.from(nameSpans).map(span => span.innerText.toLowerCase()).join(' ');
+		        const phoneNumberSpan = item.querySelector("h5 + span + br + h5 + span");
+		        const emailSpan = item.querySelector("h5 + span + br + h5 + span + br + h5 + span");
+		        const phoneNumber = phoneNumberSpan ? phoneNumberSpan.innerText.toLowerCase() : '';
+		        const email = emailSpan ? emailSpan.innerText.toLowerCase() : '';
+		        
+		        if (name.includes(searchTerm) || phoneNumber.includes(searchTerm) || email.includes(searchTerm)) {
+		            item.style.display = "";
+		        } else {
+		            item.style.display = "none";
+		        }
+		    });
+        }
+
+        document.getElementById("search-button").addEventListener("click", function() {
+            const searchTerm = document.getElementById("search-contact").value.toLowerCase();
+            filterContacts(searchTerm);
+        });
+
+        function validateContact(firstName, middleName, lastName, phoneNumber, email) {
+            if ((!phoneNumber && !email) || (!firstName && !lastName && !middleName)) {
+                if (!phoneNumber && !email && !firstName && !lastName && !middleName) {
+                    alert("Please provide information.");
+                    return false;
+                } else if (!phoneNumber && !email) {
+                    alert("Please provide either phone number or email.");
+                    return false;
+                } else if (!firstName && !lastName && !middleName) {
+                    alert("Please provide a name.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        document.getElementById("add-contact").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const firstName = document.getElementById("new-fname").value;
+            const middleName = document.getElementById("new-mname").value;
+            const lastName = document.getElementById("new-lname").value;
+            const phoneNumber = document.getElementById("new-number").value;
+            const email = document.getElementById("new-email").value;
+
+            if (!validateContact(firstName, middleName, lastName, phoneNumber, email)) {
+                return;
+            }
+
+            fetch("/userId", {
+                method: "GET",
+                headers: {"Content-Type": "application/json"}
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== "error") {
+                    const userId = data.userId;
+
+                    fetch("/contacts", {
+                        method: "POST",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({firstName, middleName, lastName, phoneNumber, email, userId})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            window.location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(() => {
+                        alert("An error occurred. Please try again.");
+                    });
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(() => {
+                alert("An error occurred. Please try again.");
+            });
+        });
+
+        function deleteContact(contactId) {
+            fetch(`/contacts/${contactId}`, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(() => {
+                alert("An error occurred. Please try again.");
+            });
+        }
+
+        function editContact(id, firstName, middleName, lastName, phoneNumber, email) {
+            document.getElementById("update-id").value = id;
+            document.getElementById("update-fname").value = firstName;
+            document.getElementById("update-mname").value = middleName;
+            document.getElementById("update-lname").value = lastName;
+            document.getElementById("update-number").value = phoneNumber;
+            document.getElementById("update-email").value = email;
+            document.getElementById("update-contact").style.display = "block";
+        }
+
+        document.getElementById("update-contact").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const id = document.getElementById("update-id").value;
+            const firstName = document.getElementById("update-fname").value;
+            const middleName = document.getElementById("update-mname").value;
+            const lastName = document.getElementById("update-lname").value;
+            const phoneNumber = document.getElementById("update-number").value;
+            const email = document.getElementById("update-email").value;
+
+            if (!validateContact(firstName, middleName, lastName, phoneNumber, email)) {
+                return;
+            }
+
+            fetch("/userId", {
+                method: "GET",
+                headers: {"Content-Type": "application/json"}
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status !== "error") {
+                    const userId = data.userId;
+
+                    fetch("/contacts", {
+                        method: "PUT",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({id, firstName, middleName, lastName, phoneNumber, email, userId})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === "success") {
+                            window.location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(() => {
+                        alert("Failed to update");
+                    });
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(() => {
+                alert("An error occurred. Please try again.");
+            });
+        });
+    </script>
+}

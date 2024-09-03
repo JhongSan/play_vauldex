@@ -1,0 +1,38 @@
+@()(implicit request: RequestHeader)
+
+@main("Login"){
+	<h2>Login</h2>
+	<div id="login-error" style="color: red;"></div>
+	<form id="login-form">
+		<label for="login-username">Username:</label>
+		<input type="text" id="login-username"><br><br>
+		<label for="login-password">Password:</label>
+		<input type="password" id="login-password"><br><br>
+		<button type="submit">Login</button>
+	</form>
+
+	<script type="text/javascript">
+		document.getElementById("login-form").addEventListener("submit", function(event){
+			event.preventDefault();
+			const username = document.getElementById("login-username").value;
+			const password = document.getElementById("login-password").value;
+
+			fetch("/loginPage", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({username, password})
+			})
+			.then(response => response.json())
+			.then(data => {
+				if(data.status === "success"){
+					window.location.href = "@routes.HomeController.contactBook()";
+				} else {
+					document.getElementById("login-error").innerText = data.message;
+				}
+			})
+			.catch(error => {
+				document.getElementById("login-error").innerText = "User does not exist.";
+			});
+		});
+	</script>
+}

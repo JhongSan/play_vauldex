@@ -1,0 +1,39 @@
+@()(implicit request: RequestHeader)
+
+@main("Register"){
+	<h2>Register</h2>
+	<div id="register-error" style="color:red;"></div>
+	<form id="register-form">
+		<label for="new-username">Username:</label>
+		<input type="text" id="new-username"><br><br>
+		<label for="new-password">Password:</label>
+		<input type="password" id="new-password"><br><br>
+		<button type="submit">Register</button>
+	</form>
+
+	<script type="text/javascript">
+		document.getElementById("register-form").addEventListener("submit", function(event){
+			event.preventDefault();
+			const username = document.getElementById("new-username").value;
+			const password = document.getElementById("new-password").value;
+
+			fetch("/registerPage", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({username, password})
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				if(data.status === "success"){
+					window.location.href = "@routes.HomeController.loginPage()";
+				} else {
+					document.getElementById("register-error").innerText = data.message;
+				}
+			})
+			.catch(error => {
+				document.getElementById("register-error").innerText = "An error occured. Please try again.";
+			});
+		});
+	</script>
+}
