@@ -1,0 +1,55 @@
+@()
+
+@main("Pokedex"){
+	<style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .search-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .search-container input {
+        width: 80%;
+        padding: 10px;
+        margin-right: 10px;
+      }
+      .search-container button {
+        padding: 10px 20px;
+      }
+    </style>
+  	
+	<div class="search-container">
+		<h1>Search for a Pokémon</h1>
+	  	<form id="search-form">
+	    	<input type="text" name="query" id="search-idOrName" placeholder="Enter Pokémon ID or name" required />
+	    	<button type="submit">Search</button>
+	  	</form>
+	</div>
+
+	<script type="text/javascript">
+		document.getElementById("search-form").addEventListener("submit", function(event){
+			event.preventDefault();
+			const idOrName = document.getElementById("search-idOrName").value;
+
+			fetch("/pokemon", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({idOrName})
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				if(data.status === "success"){
+					window.location.href = "/pokemon-details";
+				} else {
+					alert(data.message);
+				}
+			})
+			.catch(error => {
+				alert("An error occured. Please try again.");
+			});
+		});
+	</script>
+}
