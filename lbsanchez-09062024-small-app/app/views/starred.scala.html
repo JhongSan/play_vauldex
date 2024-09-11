@@ -1,0 +1,9 @@
+@(star: Seq[models.domain.Star])
+
+@main("Starred Article"){
+	@for(i <- star){
+		<ul>
+			<li>@i.keyword</li>
+		</ul>
+	}
+}

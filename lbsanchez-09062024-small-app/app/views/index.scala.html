@@ -1,0 +1,55 @@
+@()
+
+@main("RSS APP") {
+  <h1>News Article</h1>
+  <form id="search-form">
+    <input type="text" id="keyword-id" placeholder="Search Keyword" required>
+    <button type="submit">Search</button>
+  </form>
+
+  <script type="text/javascript">
+    document.getElementById("search-form").addEventListener("submit", function(event){
+      event.preventDefault();
+      const keyword = document.getElementById("keyword-id").value;
+
+      fetch("/article-keyword", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({keyword: keyword})
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.status === "success"){
+          window.location.href = "/articles";
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => {
+        alert("An error occured. Please try again.");
+      });
+    });
+
+    // document.getElementById("search-form").addEventListener("submit", function(event){
+    //   event.preventDefault();
+    //   const keyword = document.getElementById("keyword-id").value;
+
+    //   fetch("/star", {
+    //     method: "POST",
+    //     headers: {"Content-Type": "application/json"},
+    //     body: ({keyword: keyword})
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if(data.status === "success"){
+    //       window.location.href = "/starred-list";
+    //     } else {
+    //       alert(data.message);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     alert("An error occured. Please try again.");
+    //   });
+    // });
+  </script>
+}

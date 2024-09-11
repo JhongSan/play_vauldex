@@ -1,0 +1,49 @@
+@(keyword: String, author: Seq[Option[String]], title: Seq[Option[String]], desc: Seq[Option[String]], url: Seq[Option[String]], urlToImage: Seq[Option[String]], pubAt: Seq[Option[String]], content: Seq[Option[String]])
+
+@main("Article"){
+	<form action="/" method="get">
+		<button type="submit">Search</button>
+	</form><br>
+	<form id="star-form">
+		<input type="text" id="star-keyword" placeholder="Input keyword to star">
+		<button type="submit">Star</button>
+	</form>
+	@for(i <- 1 to 10){
+		<ul>
+			<li>
+				<strong>Article @i</strong><br><br>
+				<strong>Author: </strong><span>@author(i)</span><br><br>
+				<strong>Title: </strong><span>@title(i)</span><br><br>
+				<strong>Description: </strong><span>@desc(i)</span><br><br>
+				<a href="@url(i)">@url(i)</a><br><br>
+				<img src="@urlToImage(i)" alt="URL to image" width="500px"><br>
+				<small>@pubAt(i)</small>
+
+			</li>
+		</ul>
+	}
+
+	<script type="text/javascript">
+		document.getElementById("star-form").addEventListener("submit", function(event){
+			event.preventDefault();
+			const starKeyword = document.getElementById("star-keyword").value;
+
+			fetch("/star", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({starKeyword: starKeyword})
+			})
+			.then(response => response.json())
+			.then(data => {
+				if(data.status === "success"){
+					window.location.href = "/starred-list";
+				} else {
+					alert(data.message);
+				}
+			})
+			.catch(error => {
+				alert("An error occured. Please try again.");
+			});
+		});
+	</script>
+}
